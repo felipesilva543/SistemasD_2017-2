@@ -28,7 +28,7 @@ public class SimpleUDPClient {
 		portaServ = s.nextInt();
 		//--------------------------------------------------------
 		
-		// Declara o socket UDP
+				//Declara o socket UDP
 				DatagramSocket clientSocket = null;
 				try {
 					System.out.print("Cliente.\nDigite\n" +

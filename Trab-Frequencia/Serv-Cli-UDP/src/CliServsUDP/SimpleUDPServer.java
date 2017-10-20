@@ -3,7 +3,6 @@ package CliServsUDP;
 import java.io.*;
 import java.net.*;
 
-import javax.swing.SingleSelectionModel;
 
 public class SimpleUDPServer {
 
@@ -27,7 +26,7 @@ public class SimpleUDPServer {
 						System.out.println("Esperando Msg " + id + " ...");
 						// Cria pacote para receber a mensagem UDP
 						DatagramPacket request = new DatagramPacket(receiveData, receiveData.length);
-						InetAddress IPAddressCli = request.getAddress();
+						//InetAddress IPAddressCli = request.getAddress();
 						
 						
 						// Espera a chegada de uma msg (bloqueante)
