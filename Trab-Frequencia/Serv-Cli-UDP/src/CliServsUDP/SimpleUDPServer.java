@@ -8,7 +8,7 @@ import javax.swing.SingleSelectionModel;
 public class SimpleUDPServer {
 
 	public static void main(String[] args) {
-		// Declara socket UDP
+				// Declara socket UDP
 				DatagramSocket serverSocket = null;
 				String msgResposta;
 				int requi = 0;
@@ -18,7 +18,7 @@ public class SimpleUDPServer {
 					// Instancia socker UDP (define que ele deve usar a porta 6789)
 					serverSocket = new DatagramSocket(portaSer);
 					System.out.println("Servidor em execucão!");
-					// Cria array de bytes que será enviado para o servidor
+					// Cria array de bytes que será enviado para o cliente
 					byte[] receiveData = new byte[1024];
 					int id = 0;
 					// Cria loop para receber mais de uma msg
