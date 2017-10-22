@@ -2,9 +2,7 @@ package Chat;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.net.Socket;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -36,27 +34,18 @@ public class Mensagem extends Thread{
 			// Lê msg enviada pelo cliente
 			String msgRequisicao = inFromClient.readUTF();
 			this.nomeCliente = msgRequisicao;
-			outToClient.writeUTF("Bem vindo " + this.nomeCliente + ", digite :DATA para transmitir informações de data e horário.");
+			outToClient.writeUTF("Bem vindo " + this.nomeCliente + ".");
 			clis.add(this);
 			
 			
 			while(true) {
 				msgRequisicao = inFromClient.readUTF();
-				if(msgRequisicao.equalsIgnoreCase(":DATA")) {
-					//Pegar data e hr do sistema
-					SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm");
-					// Mostra data e hr
-					msgRequisicao = sdf.format(new Date());
+				
 					for(Mensagem elemento : clis) {
 						elemento.getOutToClient().writeUTF(nomeCliente + ": " + msgRequisicao);
 					}
 					msgRequisicao = null;
-				}else {
-					for(Mensagem elemento : clis) {
-						elemento.getOutToClient().writeUTF(nomeCliente + ": " + msgRequisicao);
-					}
-					msgRequisicao = null;
-				}
+				
 			}
 			
 			

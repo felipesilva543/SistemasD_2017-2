@@ -50,6 +50,7 @@ public class Cliente {
 				while (true) {
 					String entrdaCli = inFromUser.readLine();
 					outToServer.writeUTF(entrdaCli);
+					
 				}
 			} catch (Exception e) {
 				// TODO: handle exception
