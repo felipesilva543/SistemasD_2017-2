@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class SimpleTCPClient {
 
 	public static void main(String[] args) {
-		// Declara as mensagens da aplicação
+				// Declara as mensagens da aplicação
 				String requisicao;
 				String resposta;
 				//String ip;
