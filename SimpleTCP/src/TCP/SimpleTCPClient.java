@@ -4,7 +4,7 @@ import java.net.*;
 
 class SimpleTCPClient {
 	public static void main(String argv[]) {
-		// Declara as mensagens da aplicação
+		// Declara as mensagens da aplicaï¿½ï¿½o
 		String requisicao;
 		String resposta;
 
@@ -14,15 +14,16 @@ class SimpleTCPClient {
 		try {
 			// Instancia o socket
 			clientSocket = new Socket("localhost", 6789);
-			// Instancia objeto que escreve no buffer de saída
+			// Instancia objeto que escreve no buffer de saï¿½da
 			DataOutputStream outToServer = new DataOutputStream(clientSocket.getOutputStream());
-			// Instancia objeto que lê buffer de entrada
+			// Instancia objeto que lï¿½ buffer de entrada
 			DataInputStream inFromServer = new DataInputStream(clientSocket.getInputStream());
 			System.out.println("Escreva MSG a ser enviada:");
 			// Ler entrada do teclado
 			requisicao = inFromUser.readLine();
 			// Enviar mensagem digitada para o servidor
 			outToServer.writeUTF(requisicao + '\n');
+			
 			// Esperar resposta do servidor
 			resposta = inFromServer.readUTF();
 			System.out.println("FROM SERVER: " + resposta);
