@@ -14,7 +14,7 @@ public class Serv {
 			System.out.println("Server ON!");
 			while(true) {
 				Socket clientSocket = listenSocket.accept();
-				System.out.println(listenSocket.getInetAddress() + "entrou.");
+				System.out.println(listenSocket.getInetAddress() + " entrou.");
 				Connection c = new Connection(clientSocket);
 			}
 		} catch(IOException e) {System.out.println("Listen socket:"+e.getMessage());}
