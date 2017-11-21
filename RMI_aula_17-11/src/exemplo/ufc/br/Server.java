@@ -26,11 +26,8 @@ public class Server implements Calc {
 	public double sub(double n1, double n2) throws RemoteException {
 		return n1 - n2;
 	}
-	public String div(double n1, double n2) throws RemoteException {
-		if(n2 == 0)
-			return "Impossivel dividir por 0!\n";
-		double res = n1/n2;
-		return res+"";
+	public double div(double n1, double n2) throws RemoteException {
+		return n1 / n2;
 	}
 
 	public static void main(String args[]) {
