@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
-import java.net.SocketException;
-import java.net.UnknownHostException;
+
+import sun.security.x509.IPAddressName;
 
 public class BroadcastServer {
 	public static void main(String args[]) {
@@ -20,22 +20,18 @@ public class BroadcastServer {
 				DatagramPacket receivePacket = new DatagramPacket(receiveArray, receiveArray.length);
 				socket.receive(receivePacket);
 				String msg = new String(receivePacket.getData(), 0, receivePacket.getLength());
-				System.out.println("Mensagem recebida: " + msg);
-				if(msg.equals("calc")) {
-					String retorno = "Olá, eu tenho esse serviço!";
+				InetAddress ipCli = receivePacket.getAddress();
+				System.out.println("Mensagem recebida: " + msg + " de " + ipCli);
+				if(msg.equals("calcF")) {
+					String retorno = "Olá, eu tenho esse serviço!\n"
+								   + " ->Calculadora:\n -->Operação"
+								   + "(Ex: 2 + 2).\n -->: ";
 					sendAgrVai(receivePacket, socket, retorno);
-					//IP
-					InetAddress servidorAddr = receivePacket.getAddress();
-					String ipServ = servidorAddr.getHostAddress();
-					sendAgrVai(receivePacket, socket, ipServ);
-					//Porta
-					sendAgrVai(receivePacket, socket, ""+portServ);
 					
 					// Espera a chegada de uma msg (bloqueante)
 					socket.receive(receivePacket);
 					// Armazena a mensagem que chegou no formato String
 					String operacao = new String(receivePacket.getData(), 0, receivePacket.getLength());
-					
 					//Separando a operação em varios pedaços
 					String ope[] = operacao.split(" ");
 					
@@ -63,14 +59,8 @@ public class BroadcastServer {
 							String env = "Resultado: " + Integer.toString(res);
 							sendAgrVai(receivePacket, socket, env);
 						}
-					}
-					
+					}	
 				}
-//				InetAddress servidorAddr = receivePacket.getAddress();
-//				msg = servidorAddr.getHostAddress();
-//				sendAgrVai(receivePacket, socket, msg);
-				
-				
 			}
 
 		} catch (Exception e) {

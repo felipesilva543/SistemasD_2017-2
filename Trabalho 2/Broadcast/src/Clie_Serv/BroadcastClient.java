@@ -48,38 +48,31 @@ class BroadcastClient {
 					try {
 						sendPacket = new DatagramPacket(sendArray, sendArray.length, broadcast, 8888);
 						socket.send(sendPacket);
-						
-						if(msg.equals("calc")) {
-			//////////////////Criando comunicação com o servidor//////////////////
+		//////////////////Criando comunicação com o servidor//////////////////			
+						if(msg.equals("calcF")) {
 							byte[] receiveData = new byte[1024];
 							DatagramPacket request = new DatagramPacket(receiveData, receiveData.length);
 							
-							//Reconhecido por alguem
+							//Reconhecimento em REDE
 							socket.receive(request);
 							String resposta = new String(request.getData(), 0, request.getLength());
-							System.out.println(resposta);
-							//Recebendo o IP
-							socket.receive(request);
-							String respostaIp = new String(request.getData(), 0, request.getLength());
-							//Recebendo a Porta
-							socket.receive(request);
-							String respostaPorta = new String(request.getData(), 0, request.getLength());
-							int portaServ = Integer.parseInt(respostaPorta);
+							InetAddress ipServ = request.getAddress();
+							String respostaIp = ipServ.getHostAddress();
+							int respostaPorta = request.getPort();
 							System.out.println("Ip do servidor: " + respostaIp + ", porta: " + respostaPorta);
-							
-							System.out.print("Operação (Ex: 2 + 2): ");
+							System.out.print(resposta);
+
+							//Ler operação
 							String operacao = entradaDoUsuario.readLine();
 							byte[] sendOperacao = operacao.getBytes();
 							
-							InetAddress IpServidor = InetAddress.getByName(respostaIp);
-							DatagramPacket sendPacketUniCast = new DatagramPacket(sendOperacao, sendOperacao.length, IpServidor, portaServ);
+							//InetAddress IpServidor = InetAddress.getByName(respostaIp);                //Se nao funcionar MUDAR ipServ
+							DatagramPacket sendPacketUniCast = new DatagramPacket(sendOperacao, sendOperacao.length, ipServ, respostaPorta);
 							socket.send(sendPacketUniCast);
 							socket.receive(request);
 							String respostaOperacao = new String(request.getData(), 0, request.getLength());
 							System.out.println(respostaOperacao);
 						}
-						
-						
 					} catch (Exception e) {
 					}
 				}
