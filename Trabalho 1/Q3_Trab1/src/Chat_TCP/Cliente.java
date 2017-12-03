@@ -13,11 +13,11 @@ public class Cliente {
 				DataInputStream in = new DataInputStream( s.getInputStream());
 				DataOutputStream out =new DataOutputStream( s.getOutputStream());
 				while (true) {
-					System.out.print("Mensagém: ");
+					System.out.print("Mensagem: ");
 					String msgEnviar = inFromUser.readLine();
 					out.writeUTF(msgEnviar);
 					String data = in.readUTF();
-					System.out.println("Received: "+ data) ;
+					System.out.println("Received: "+ data);
 				}
 			 
 		}catch (UnknownHostException e){System.out.println("Socket:"+e.getMessage());
